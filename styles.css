@@ -142,7 +142,61 @@ p {
   color: var(--primary);
   margin-bottom: 15px;
 }
+/* WIDGET STYLES */
+#feedback-widget {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
 
+#widget-trigger {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--primary);
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(56, 189, 248, 0.3);
+  transition: transform 0.3s ease;
+}
+
+#widget-trigger:hover { transform: scale(1.1); }
+
+#widget-content {
+  background: #1e293b;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 16px;
+  margin-bottom: 15px;
+  width: 280px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+}
+
+.emoji-row {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+}
+
+.emoji-btn {
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.emoji-btn:hover { transform: scale(1.3); }
+
+/* Helper Classes for JS */
+.content-hidden { display: none; }
+.hidden { display: none; }
 /* 5. RESPONSIVE ADJUSTMENTS */
 @media (min-width: 768px) {
   .hero { padding: 160px 40px; }

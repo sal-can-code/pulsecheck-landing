@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
+    
   </head>
   <body>
     <header class="hero">
@@ -43,5 +43,21 @@
           </div>
       </div>
   </section>
+  <div id="feedback-widget" class="widget-hidden">
+    <button id="widget-trigger" class="pulse-icon">💬</button>
+    
+    <div id="widget-content" class="content-hidden">
+      <h3>How's your experience?</h3>
+      <div class="emoji-row">
+        <button class="emoji-btn" data-type="love">😍</button>
+        <button class="emoji-btn" data-type="neutral">😐</button>
+        <button class="emoji-btn" data-type="confused">😕</button>
+      </div>
+      <div id="feedback-response" class="hidden">
+        <p id="response-msg"></p>
+      </div>
+    </div>
+  </div>
   </body>
+  <script type="module" src="script.js"></script>
 </html>
