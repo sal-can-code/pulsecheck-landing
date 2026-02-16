@@ -1,4 +1,3 @@
-// DOM Elements
 const teaser = document.getElementById('feedback-teaser');
 const openBtn = document.getElementById('open-widget-btn');
 const widgetContent = document.getElementById('widget-content');
@@ -7,26 +6,46 @@ const responseDiv = document.getElementById('feedback-response');
 const responseMsg = document.getElementById('response-msg');
 const emojiRow = document.querySelector('.emoji-row');
 
-// 1. Scroll Trigger (Shows Teaser after 30% scroll)
+let hasEngaged = false;
+let firstTriggerHit = false;
+
+// 1. SCROLL & TIME LOGIC
 window.addEventListener('scroll', () => {
+  if (hasEngaged || firstTriggerHit) return;
+
   const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-  if (scrollPercent > 30) {
+
+  // First Appearance at 60%
+  if (scrollPercent > 60) {
+    firstTriggerHit = true;
     teaser.classList.add('active');
+
+    // Auto-hide after 4 seconds, then reapppear after 8 seconds
+    setTimeout(() => {
+      if (!hasEngaged) {
+        teaser.classList.remove('active'); // Hide
+        
+        // Final reappearance nudge
+        setTimeout(() => {
+          if (!hasEngaged) teaser.classList.add('active');
+        }, 8000); 
+      }
+    }, 4000);
   }
 });
 
-// 2. Teaser "Sure!" button logic
+// 2. TEASER INTERACTION
 openBtn.addEventListener('click', () => {
+  hasEngaged = true;
   teaser.classList.remove('active');
+  teaser.style.display = 'none';
   widgetContent.classList.remove('content-hidden');
 });
 
-// 3. Handle Emoji Clicks
+// 3. EMOJI FEEDBACK LOGIC
 emojiBtns.forEach(btn => {
   btn.addEventListener('click', () => {
     const type = btn.getAttribute('data-type');
-    
-    // Product Logic for responses
     const messages = {
       confused: "Oh no! What's confusing? We're on it. 🛠️",
       love: "Awesome! Glad you're liking it. 🚀",
@@ -34,14 +53,11 @@ emojiBtns.forEach(btn => {
     };
 
     responseMsg.innerText = messages[type] || messages.neutral;
-
-    // UI State Change
     emojiRow.classList.add('hidden');
     responseDiv.classList.remove('hidden');
 
-    // Auto-close widget after 2 seconds
     setTimeout(() => {
       widgetContent.classList.add('content-hidden');
-    }, 2000);
+    }, 2500);
   });
 });

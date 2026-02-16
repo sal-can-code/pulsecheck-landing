@@ -7,55 +7,74 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
     <nav class="navbar">
-        <div class="nav-container">
+        <div class="container">
             <div class="logo"><span class="logo-icon">🩺</span> PulseCheck</div>
         </div>
     </nav>
 
-    <header class="hero">
-        <h1>Stop guessing why your users leave.</h1>
-        <p>Get instant feedback from your visitors before they bounce.</p>
-        <button class="cta-btn">Get PulseCheck Free</button>
-    </header>
-
-    <section class="problems">
-        <h2>Why small businesses lose customers</h2>
-        <div class="problem-grid">
-            <div class="card">
-                <h3>Complexity</h3>
-                <p>Traditional analytics are too hard to read for busy owners.</p>
+    <main>
+        <section class="hero">
+            <div class="container hero-inner">
+                <h1>Stop guessing why your users leave.</h1>
+                <p>Get instant feedback from your visitors before they bounce. Simple, non-intrusive, and powerful.</p>
+                
+                <a href="#problems" class="cta-btn">Get PulseCheck Free</a>
             </div>
-            <div class="card">
-                <h3>Silence</h3>
-                <p>Users leave without a word. You never know what went wrong.</p>
-            </div>
-            <div class="card">
-                <h3>Friction</h3>
-                <p>Long surveys annoy users. PulseCheck takes 2 seconds.</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <div id="feedback-teaser">
-        <div class="teaser-bubble">
-            <span class="teaser-text">Psst! Mind sharing a thought? 🧠</span><br>
-            <button id="open-widget-btn">Sure!</button>
-        </div>
-        
-    </div>
+        <section id="problems" class="problems">
+            <div class="container">
+                <header class="section-header">
+                    <h2>Why small businesses lose customers</h2>
+                </header>
+                
+                <div class="problem-grid">
+                    
+                    <article class="card">
+                        <h3>Complexity</h3>
+                        <p>Traditional analytics are too hard to read for busy owners.</p>
+                    </article>
 
-    <div id="widget-content" class="content-hidden">
-        <h3>How's your experience?</h3>
-        <div class="emoji-row">
-            <button class="emoji-btn" data-type="love">😍</button>
-            <button class="emoji-btn" data-type="neutral">😐</button>
-            <button class="emoji-btn" data-type="confused">😕</button>
-        </div>
-        <div id="feedback-response" class="hidden">
-            <p id="response-msg"></p>
-        </div>
-    </div>
+                    <article class="card">
+                        <h3>Silence</h3>
+                        <p>Users leave without a word. You never know what went wrong.</p>
+                    </article>
+
+                    <article class="card">
+                        <h3>Friction</h3>
+                        <p>Long surveys annoy users. PulseCheck takes 2 seconds.</p>
+                    </article>
+
+                </div> </div>
+        </section>
+
+        <aside id="feedback-system">
+            
+            <div id="feedback-teaser" class="teaser-hidden">
+                <div class="teaser-bubble">
+                    <span class="teaser-text">Psst! Mind sharing a thought? 🧠</span>
+                    <button id="open-widget-btn">Sure!</button>
+                </div>
+            </div>
+
+            <div id="widget-content" class="content-hidden">
+                <h3>How's your experience?</h3>
+                
+                <div class="emoji-row">
+                    <button class="emoji-btn" data-type="love">😍</button>
+                    <button class="emoji-btn" data-type="neutral">😐</button>
+                    <button class="emoji-btn" data-type="confused">😕</button>
+                </div>
+
+                <div id="feedback-response" class="hidden">
+                    <p id="response-msg"></p>
+                </div>
+            </div>
+
+        </aside>
+    </main>
 
     <script src="script.js"></script>
 </body>

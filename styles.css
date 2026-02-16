@@ -1,157 +1,229 @@
-/* 1. SETUP & VARIABLES */
-:root {
-  --primary: #38bdf8;
-  --bg-dark: #0f172a;
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-  --glass: rgba(255, 255, 255, 0.03);
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-  font-family: 'Inter', sans-serif;
-  background-color: var(--bg-dark);
-  color: var(--text-main);
-  line-height: 1.6;
-  overflow-x: hidden;
-}
-
-/* 2. NAVIGATION */
-.navbar {
-  position: fixed;
-  top: 0; width: 100%; z-index: 1000;
-  background: rgba(15, 23, 42, 0.8);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.nav-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 1rem 20px;
-}
-
-.logo {
-  font-size: 1.5rem;
-  font-weight: 800;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.logo-icon {
-  background: linear-gradient(135deg, var(--primary), #818cf8);
-  padding: 4px; border-radius: 6px;
-}
-
-/* 3. HERO & TYPOGRAPHY */
-.hero {
-  min-height: 80vh;
-  padding: 160px 20px 100px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-h1 {
-  font-size: clamp(2.2rem, 5vw + 1rem, 3.5rem);
-  line-height: 1.1;
-  margin-bottom: 1.5rem;
-  background: linear-gradient(90deg, var(--primary), #818cf8);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-p {
-  font-size: clamp(1rem, 1vw + 0.8rem, 1.25rem);
-  color: var(--text-muted);
-  max-width: 65ch;
-  margin-inline: auto;
-}
-
-.cta-btn {
-  background-color: var(--primary);
-  color: var(--bg-dark);
-  padding: 16px 32px;
-  border-radius: 8px;
-  border: none;
-  font-weight: bold;
-  margin-top: 2rem;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-
-.cta-btn:hover { transform: scale(1.05); }
-
-/* 4. PROBLEM SECTION */
-.problems { padding: 80px 20px; text-align: center; }
-
-.problem-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  max-width: 1200px;
-  margin: 40px auto;
-}
-
-.card {
-  background: var(--glass);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 40px 30px;
-  border-radius: 16px;
-  transition: 0.3s;
-  text-align: left;
-}
-
-.card:hover {
-  border-color: var(--primary);
-  transform: translateY(-10px);
-}
-
-.card h3 { color: var(--primary); margin-bottom: 10px; }
-
-/* 5. WIDGET & TEASER */
-#feedback-teaser {
-  position: fixed; bottom: 30px; right: -350px;
-  display: flex; align-items: center; gap: 10px;
-  transition: right 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  z-index: 2000;
-}
-
-#feedback-teaser.active { right: 30px; }
-
-.teaser-bubble {
-  background: var(--primary);
-  color: var(--bg-dark);
-  padding: 15px; border-radius: 20px 20px 0 20px;
-}
-
-#open-widget-btn {
-  background: var(--bg-dark);
-  color: white; border: none;
-  padding: 5px 12px; border-radius: 8px; margin-top: 5px;
-  cursor: pointer;
-}
-
-#widget-content {
-  position: fixed; bottom: 100px; right: 30px;
-  background: #1e293b; border: 1px solid rgba(255,255,255,0.1);
-  padding: 25px; border-radius: 16px; width: 280px;
-  z-index: 2001;
-}
-
-.emoji-row { display: flex; justify-content: space-around; margin-top: 15px; }
-
-.emoji-btn { background: none; border: none; font-size: 1.8rem; cursor: pointer; transition: 0.2s; }
-.emoji-btn:hover { transform: scale(1.3); }
-
-/* Utility Classes */
-.content-hidden, .hidden { display: none; }
-
-@media (min-width: 768px) {
-  .hero { padding-top: 200px; }
-}
+/* ==========================================
+   1. SETUP & GLOBAL VARIABLES 
+   ========================================== */
+   :root {
+    --primary: #38bdf8;
+    --bg-dark: #0f172a;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --glass: rgba(255, 255, 255, 0.03);
+  }
+  
+  /* RESET & BASE STYLES */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html {
+    scroll-behavior: smooth; /* Enables smooth glide for the CTA link */
+  }
+  
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  
+  /* UNIVERSAL CONTAINER: Keeps content centered and constrained */
+  .container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  
+  /* ==========================================
+     2. NAVIGATION BAR
+     ========================================== */
+  .navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    padding: 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .logo-icon {
+    background: linear-gradient(135deg, var(--primary), #818cf8);
+    padding: 4px;
+    border-radius: 6px;
+  }
+  
+  /* ==========================================
+     3. HERO SECTION
+     ========================================== */
+  .hero {
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding-top: 80px; /* Accounts for fixed navbar */
+  }
+  
+  .hero-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  h1 {
+    font-size: clamp(2.2rem, 5vw + 1rem, 3.5rem);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(90deg, var(--primary), #818cf8);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .hero p {
+    font-size: clamp(1rem, 1vw + 0.8rem, 1.25rem);
+    color: var(--text-muted);
+    max-width: 65ch;
+  }
+  
+  /* CALL TO ACTION BUTTON (Anchor Tag) */
+  .cta-btn {
+    display: inline-block;
+    text-decoration: none;
+    background-color: var(--primary);
+    color: var(--bg-dark);
+    padding: 16px 32px;
+    border-radius: 8px;
+    font-weight: bold;
+    margin-top: 2.5rem;
+    transition: transform 0.2s ease;
+  }
+  
+  .cta-btn:hover {
+    transform: scale(1.05);
+  }
+  
+  /* ==========================================
+     4. PROBLEM SECTION & GRID
+     ========================================== */
+  .problems {
+    padding: 100px 0;
+    text-align: center;
+  }
+  
+  .section-header h2 {
+    font-size: 2rem;
+    margin-bottom: 50px;
+  }
+  
+  .problem-grid {
+    display: grid;
+    /* auto-fit + minmax handles responsiveness automatically */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+  }
+  
+  .card {
+    background: var(--glass);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 40px 30px;
+    border-radius: 16px;
+    text-align: left;
+    transition: all 0.3s ease;
+  }
+  
+  .card:hover {
+    border-color: var(--primary);
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.05);
+  }
+  
+  .card h3 {
+    color: var(--primary);
+    margin-bottom: 15px;
+  }
+  
+  /* ==========================================
+     5. FEEDBACK SYSTEM (Teaser & Widget)
+     ========================================== */
+  
+  /* TEASER: Slides in from the right */
+  #feedback-teaser {
+    position: fixed;
+    bottom: 30px;
+    right: -350px; /* Initially hidden */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: right 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 2000;
+  }
+  
+  #feedback-teaser.active {
+    right: 30px; /* Triggered by scroll in JS */
+  }
+  
+  .teaser-bubble {
+    background: var(--primary);
+    color: var(--bg-dark);
+    padding: 15px 20px;
+    border-radius: 20px 20px 0 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  }
+  
+  #open-widget-btn {
+    background: var(--bg-dark);
+    color: white;
+    border: none;
+    padding: 6px 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 0.85rem;
+  }
+  
+  /* MAIN WIDGET CONTENT */
+  #widget-content {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    background: #1e293b;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 25px;
+    border-radius: 16px;
+    width: 300px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    z-index: 2001;
+  }
+  
+  .emoji-row {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  
+  .emoji-btn {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  
+  .emoji-btn:hover { transform: scale(1.3); }
+  
+  /* VISIBILITY UTILITIES */
+  .content-hidden, .hidden {
+    display: none;
+  }
