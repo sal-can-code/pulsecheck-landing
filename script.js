@@ -1,30 +1,47 @@
-const trigger = document.getElementById('widget-trigger');
-const content = document.getElementById('widget-content');
+// DOM Elements
+const teaser = document.getElementById('feedback-teaser');
+const openBtn = document.getElementById('open-widget-btn');
+const widgetContent = document.getElementById('widget-content');
 const emojiBtns = document.querySelectorAll('.emoji-btn');
 const responseDiv = document.getElementById('feedback-response');
 const responseMsg = document.getElementById('response-msg');
+const emojiRow = document.querySelector('.emoji-row');
 
-// 1. Toggle the widget open/close
-trigger.addEventListener('click', () => {
-  content.classList.toggle('content-hidden');
+// 1. Scroll Trigger (Shows Teaser after 30% scroll)
+window.addEventListener('scroll', () => {
+  const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+  if (scrollPercent > 30) {
+    teaser.classList.add('active');
+  }
 });
 
-// 2. Handle Emoji Clicks
+// 2. Teaser "Sure!" button logic
+openBtn.addEventListener('click', () => {
+  teaser.classList.remove('active');
+  widgetContent.classList.remove('content-hidden');
+});
+
+// 3. Handle Emoji Clicks
 emojiBtns.forEach(btn => {
   btn.addEventListener('click', () => {
     const type = btn.getAttribute('data-type');
     
-    // The "Product Engineer" logic:
-    if (type === 'confused') {
-      responseMsg.innerText = "Oh no! What's confusing? We're on it. 🛠️";
-    } else if (type === 'love') {
-      responseMsg.innerText = "Awesome! Glad you're liking it. 🚀";
-    } else {
-      responseMsg.innerText = "Thanks for the feedback! 👍";
-    }
+    // Product Logic for responses
+    const messages = {
+      confused: "Oh no! What's confusing? We're on it. 🛠️",
+      love: "Awesome! Glad you're liking it. 🚀",
+      neutral: "Thanks for the feedback! 👍"
+    };
 
-    // Show response, hide emojis
-    document.querySelector('.emoji-row').classList.add('hidden');
+    responseMsg.innerText = messages[type] || messages.neutral;
+
+    // UI State Change
+    emojiRow.classList.add('hidden');
     responseDiv.classList.remove('hidden');
+
+    // Auto-close widget after 2 seconds
+    setTimeout(() => {
+      widgetContent.classList.add('content-hidden');
+    }, 2000);
   });
 });
