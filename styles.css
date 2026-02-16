@@ -17,7 +17,7 @@
   }
   
   html {
-    scroll-behavior: smooth; /* Enables smooth glide for the CTA link */
+    scroll-behavior: smooth;
   }
   
   body {
@@ -28,7 +28,7 @@
     overflow-x: hidden;
   }
   
-  /* UNIVERSAL CONTAINER: Keeps content centered and constrained */
+  /* UNIVERSAL CONTAINER */
   .container {
     width: 90%;
     max-width: 1100px;
@@ -64,14 +64,14 @@
   }
   
   /* ==========================================
-     3. HERO SECTION
+     3. HEADER / HERO SECTION
      ========================================== */
   .hero {
     min-height: 85vh;
     display: flex;
     align-items: center;
     text-align: center;
-    padding-top: 80px; /* Accounts for fixed navbar */
+    padding-top: 80px;
   }
   
   .hero-inner {
@@ -96,7 +96,6 @@
     max-width: 65ch;
   }
   
-  /* CALL TO ACTION BUTTON (Anchor Tag) */
   .cta-btn {
     display: inline-block;
     text-decoration: none;
@@ -106,11 +105,12 @@
     border-radius: 8px;
     font-weight: bold;
     margin-top: 2.5rem;
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, background 0.2s ease;
   }
   
   .cta-btn:hover {
     transform: scale(1.05);
+    background-color: #7dd3fc;
   }
   
   /* ==========================================
@@ -128,7 +128,6 @@
   
   .problem-grid {
     display: grid;
-    /* auto-fit + minmax handles responsiveness automatically */
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
   }
@@ -154,23 +153,25 @@
   }
   
   /* ==========================================
-     5. FEEDBACK SYSTEM (Teaser & Widget)
+     5. FEEDBACK SYSTEM (Floating above Footer)
      ========================================== */
-  
-  /* TEASER: Slides in from the right */
-  #feedback-teaser {
+  #feedback-teaser, #widget-content {
     position: fixed;
-    bottom: 30px;
-    right: -350px; /* Initially hidden */
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    transition: right 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    bottom: 120px; /* Aligned to sit above footer links */
+    right: 30px;
     z-index: 2000;
   }
   
+  /* TEASER SLIDE LOGIC */
+  #feedback-teaser {
+    right: -450px; /* Initially off-screen */
+    display: flex;
+    align-items: center;
+    transition: right 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  
   #feedback-teaser.active {
-    right: 30px; /* Triggered by scroll in JS */
+    right: 30px;
   }
   
   .teaser-bubble {
@@ -192,11 +193,8 @@
     font-size: 0.85rem;
   }
   
-  /* MAIN WIDGET CONTENT */
+  /* MAIN WIDGET BOX */
   #widget-content {
-    position: fixed;
-    bottom: 100px;
-    right: 30px;
     background: #1e293b;
     border: 1px solid rgba(255, 255, 255, 0.1);
     padding: 25px;
@@ -204,7 +202,6 @@
     width: 300px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(10px);
-    z-index: 2001;
   }
   
   .emoji-row {
@@ -221,9 +218,79 @@
     transition: transform 0.2s;
   }
   
-  .emoji-btn:hover { transform: scale(1.3); }
+  .emoji-btn:hover {
+    transform: scale(1.3);
+  }
+  
+  /* ==========================================
+     6. FOOTER SECTION
+     ========================================== */
+  .footer {
+    padding: 60px 0 40px 0;
+    margin-top: 100px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(15, 23, 42, 0.8);
+    position: relative;
+  }
+  
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+  
+  .footer-links {
+    display: flex;
+    gap: 20px;
+  }
   
   /* VISIBILITY UTILITIES */
   .content-hidden, .hidden {
     display: none;
   }
+  /* ==========================================
+   7. MOBILE RESPONSIVENESS
+   Adjusts layout for screens smaller than 768px
+   ========================================== */
+@media (max-width: 768px) {
+  /* HERO: Reduce font sizes so they don't wrap awkwardly */
+  h1 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  /* GRID: Force cards to stack in a single column */
+  .problem-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* WIDGET: Center the popup and make it slightly smaller */
+  #feedback-teaser, #widget-content {
+    right: 5%;
+    left: 5%; /* Centers it on mobile */
+    width: 90%;
+    bottom: 80px; /* Moves it closer to the bottom on small screens */
+  }
+
+  #feedback-teaser.active {
+    right: 5%;
+  }
+
+  /* FOOTER: Stack links vertically for easier tapping */
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-links {
+    justify-content: center;
+  }
+}

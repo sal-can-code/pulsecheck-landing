@@ -15,17 +15,15 @@ window.addEventListener('scroll', () => {
 
   const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
 
-  // First Appearance at 60%
   if (scrollPercent > 60) {
     firstTriggerHit = true;
     teaser.classList.add('active');
 
-    // Auto-hide after 4 seconds, then reapppear after 8 seconds
+    // Hide after 4s, then nudge again after 8s
     setTimeout(() => {
       if (!hasEngaged) {
-        teaser.classList.remove('active'); // Hide
+        teaser.classList.remove('active');
         
-        // Final reappearance nudge
         setTimeout(() => {
           if (!hasEngaged) teaser.classList.add('active');
         }, 8000); 
@@ -42,14 +40,22 @@ openBtn.addEventListener('click', () => {
   widgetContent.classList.remove('content-hidden');
 });
 
-// 3. EMOJI FEEDBACK LOGIC
+// 3. EMOJI FEEDBACK & CONFETTI
 emojiBtns.forEach(btn => {
   btn.addEventListener('click', () => {
+    // Fire Confetti!
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.7 },
+      colors: ['#38bdf8', '#818cf8', '#ffffff']
+    });
+
     const type = btn.getAttribute('data-type');
     const messages = {
-      confused: "Oh no! What's confusing? We're on it. 🛠️",
       love: "Awesome! Glad you're liking it. 🚀",
-      neutral: "Thanks for the feedback! 👍"
+      neutral: "Thanks for the feedback! 👍",
+      confused: "Oh no! What's confusing? We're on it. 🛠️"
     };
 
     responseMsg.innerText = messages[type] || messages.neutral;
