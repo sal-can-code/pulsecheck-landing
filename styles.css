@@ -1,4 +1,12 @@
-/* Reset for a clean slate */
+/* 1. SETUP & VARIABLES */
+:root {
+  --primary: #38bdf8;
+  --bg-dark: #0f172a;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --glass: rgba(255, 255, 255, 0.03);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -6,78 +14,117 @@
 }
 
 body {
-  font-family: 'Inter', sans-serif; /* Modern standard */
-  background-color: #0f172a; /* Professional dark mode */
-  color: #f8fafc;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
   line-height: 1.6;
+  overflow-x: hidden; /* Prevents accidental side-scrolling on mobile */
 }
 
-.hero {
-  height: 80vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 20px;
-}
-
+/* 2. TYPOGRAPHY */
 h1 {
-  font-size: 3rem;
+  font-size: clamp(2.2rem, 5vw + 1rem, 3.5rem);
+  line-height: 1.1;
   margin-bottom: 1.5rem;
-  background: linear-gradient(90deg, #38bdf8, #818cf8); /* Cool gradient */
+  background: linear-gradient(90deg, var(--primary), #818cf8);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 p {
-  max-width: 600px;
-  font-size: 1.25rem;
-  color: #94a3b8;
-  margin-bottom: 2rem;
+  font-size: clamp(1rem, 1vw + 0.8rem, 1.25rem);
+  color: var(--text-muted);
+  max-width: 65ch;
+  margin-inline: auto; /* Centers text if max-width is hit */
 }
 
+/* 3. HERO SECTION */
+.hero {
+  min-height: 80vh;
+  padding-top: 120px; /* Adds space for the floating navbar */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 100px 20px;
+}
+/* NAVBAR STYLING */
+.navbar {
+  position: fixed; /* Stays at the top when you scroll */
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(15, 23, 42, 0.8); /* Semi-transparent navy */
+  backdrop-filter: blur(12px); /* The "Apple" frosted glass effect */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 20px;
+  display: flex;
+  justify-content: flex-start; /* Keeps logo to the left */
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-main);
+  cursor: pointer;
+}
+
+.logo-icon {
+  background: linear-gradient(135deg, var(--primary), #818cf8);
+  padding: 4px;
+  border-radius: 6px;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* 4. COMPONENTS (Button & Cards) */
 .cta-btn {
-  background-color: #38bdf8;
-  color: #0f172a;
-  padding: 16px 32px;
+  background-color: var(--primary);
+  color: var(--bg-dark);
+  min-width: 200px;
+  min-height: 48px;
+  padding: 12px 24px;
   border: none;
   border-radius: 8px;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 1.1rem;
   cursor: pointer;
   transition: transform 0.2s ease;
+  margin-top: 2rem;
 }
 
 .cta-btn:hover {
   transform: scale(1.05);
 }
-/* Problems Section Layout */
+
 .problems {
   padding: 80px 20px;
-  background-color: #0f172a; /* Deep navy background */
   text-align: center;
 }
 
-.problems h2 {
-  font-size: 2rem;
-  margin-bottom: 40px;
-  color: #f8fafc;
-}
-
-/* The Grid Container */
 .problem-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 30px;
-  max-width: 1100px;
-  margin: 0 auto;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 40px auto;
 }
 
-/* Individual Card Styling (Glassmorphism) */
 .card {
-  background: rgba(255, 255, 255, 0.03); /* Very slight white tint */
-  border: 1px solid rgba(255, 255, 255, 0.1); /* Thin border for definition */
+  background: var(--glass);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 40px 30px;
   border-radius: 16px;
   transition: all 0.3s ease;
@@ -85,19 +132,18 @@ p {
 }
 
 .card:hover {
+  border-color: var(--primary);
+  transform: translateY(-10px);
   background: rgba(255, 255, 255, 0.05);
-  border-color: #38bdf8; /* Highlight color on hover */
-  transform: translateY(-10px); /* Lift effect */
 }
 
 .card h3 {
-  color: #38bdf8;
+  color: var(--primary);
   margin-bottom: 15px;
-  font-size: 1.4rem;
 }
 
-.card p {
-  color: #94a3b8;
-  font-size: 1rem;
-  line-height: 1.5;
+/* 5. RESPONSIVE ADJUSTMENTS */
+@media (min-width: 768px) {
+  .hero { padding: 160px 40px; }
+  .problem-grid { gap: 40px; }
 }
