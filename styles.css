@@ -52,3 +52,52 @@ p {
 .cta-btn:hover {
   transform: scale(1.05);
 }
+/* Problems Section Layout */
+.problems {
+  padding: 80px 20px;
+  background-color: #0f172a; /* Deep navy background */
+  text-align: center;
+}
+
+.problems h2 {
+  font-size: 2rem;
+  margin-bottom: 40px;
+  color: #f8fafc;
+}
+
+/* The Grid Container */
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Individual Card Styling (Glassmorphism) */
+.card {
+  background: rgba(255, 255, 255, 0.03); /* Very slight white tint */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Thin border for definition */
+  padding: 40px 30px;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+.card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: #38bdf8; /* Highlight color on hover */
+  transform: translateY(-10px); /* Lift effect */
+}
+
+.card h3 {
+  color: #38bdf8;
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+}
+
+.card p {
+  color: #94a3b8;
+  font-size: 1rem;
+  line-height: 1.5;
+}
