@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
     <nav class="navbar">
         <div class="container">
             <div class="logo"><span class="logo-icon">🩺</span> PulseCheck</div>
@@ -19,27 +18,30 @@
             <div class="container hero-inner">
                 <h1>Stop guessing why your users leave.</h1>
                 <p>Get instant feedback from your visitors before they bounce. Simple, non-intrusive, and powerful.</p>
-                <a href="#problems" class="cta-btn">Get PulseCheck Free</a>
+                <form action="setup.html" class="hero-form">
+                    <input type="email" placeholder="Enter your work email" required>
+                    <button type="submit" class="cta-btn">Get My Script</button>
+                </form>
+                <div class="hero-badges">
+                    <span>✓ No credit card required</span>
+                    <span>✓ Setup in 2 minutes</span>
+                    <span>✓ GDPR Compliant</span>
+                </div>
             </div>
         </header>
 
         <section id="problems" class="problems">
             <div class="container">
-                <header class="section-header">
-                    <h2>Why small businesses lose customers</h2>
-                </header>
-                
-                <div class="problem-grid">
+                <h2 class="section-title">Why small businesses lose customers</h2>
+                <div class="grid problem-grid">
                     <article class="card">
                         <h3>Complexity</h3>
                         <p>Traditional analytics are too hard to read for busy owners.</p>
                     </article>
-
                     <article class="card">
                         <h3>Silence</h3>
                         <p>Users leave without a word. You never know what went wrong.</p>
                     </article>
-
                     <article class="card">
                         <h3>Friction</h3>
                         <p>Long surveys annoy users. PulseCheck takes 2 seconds.</p>
@@ -47,19 +49,56 @@
                 </div> 
             </div>
         </section>
+
+        <section class="how-it-works">
+            <div class="container">
+                <h2 class="section-title">Three steps to clarity</h2>
+                <div class="grid steps-grid">
+                    <div class="step">
+                        <div class="step-num">1</div>
+                        <h3>Install</h3>
+                        <p>Receive your unique script via email.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">2</div>
+                        <h3>Listen</h3>
+                        <p>PulseCheck nudges users at the perfect moment.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-num">3</div>
+                        <h3>Improve</h3>
+                        <p>See exactly where users get stuck.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+      
+        <section id="pricing" class="pricing">
+            <div class="container">
+                <div class="pricing-card">
+                    <span class="badge">Limited Offer</span>
+                    <h2>Free Forever</h2>
+                    <p class="price">$0<span>/mo</span></p>
+                    <ul class="price-features">
+                        <li>✓ Unlimited Feedback Responses</li>
+                        <li>✓ Real-time Sentiment Analysis</li>
+                        <li>✓ Custom Emoji Sets</li>
+                    </ul>
+                    <a href="#" class="cta-btn">Get Started Now</a>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer class="footer">
         <div class="container">
-            
             <aside id="feedback-system">
                 <div id="feedback-teaser" class="teaser-hidden">
                     <div class="teaser-bubble">
-                        <span class="teaser-text">Psst! Mind sharing a thought? 🧠</span>
+                        <span>Psst! Mind sharing a thought? 🧠</span>
                         <button id="open-widget-btn">Sure!</button>
                     </div>
                 </div>
-
                 <div id="widget-content" class="content-hidden">
                     <h3>How's your experience?</h3>
                     <div class="emoji-row">
@@ -72,9 +111,8 @@
                     </div>
                 </div>
             </aside>
-
             <div class="footer-content">
-                <p>&copy; 2026 PulseCheck. Built for better user experiences.</p>
+                <p>&copy; 2026 PulseCheck. Built for better UX.</p>
                 <div class="footer-links">
                     <span>Privacy</span>
                     <span>Terms</span>

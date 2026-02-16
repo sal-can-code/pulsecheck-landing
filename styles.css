@@ -1,296 +1,116 @@
-/* ==========================================
-   1. SETUP & GLOBAL VARIABLES 
-   ========================================== */
-   :root {
-    --primary: #38bdf8;
-    --bg-dark: #0f172a;
-    --text-main: #f8fafc;
-    --text-muted: #94a3b8;
-    --glass: rgba(255, 255, 255, 0.03);
-  }
-  
-  /* RESET & BASE STYLES */
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  html {
-    scroll-behavior: smooth;
-  }
-  
-  body {
-    font-family: 'Inter', sans-serif;
-    background-color: var(--bg-dark);
-    color: var(--text-main);
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
-  
-  /* UNIVERSAL CONTAINER */
-  .container {
-    width: 90%;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-  
-  /* ==========================================
-     2. NAVIGATION BAR
-     ========================================== */
-  .navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    background: rgba(15, 23, 42, 0.8);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  }
-  
-  .logo {
-    font-size: 1.5rem;
-    font-weight: 800;
-    padding: 1rem 0;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  
-  .logo-icon {
-    background: linear-gradient(135deg, var(--primary), #818cf8);
-    padding: 4px;
-    border-radius: 6px;
-  }
-  
-  /* ==========================================
-     3. HEADER / HERO SECTION
-     ========================================== */
-  .hero {
-    min-height: 85vh;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    padding-top: 80px;
-  }
-  
-  .hero-inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  h1 {
-    font-size: clamp(2.2rem, 5vw + 1rem, 3.5rem);
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
-    background: linear-gradient(90deg, var(--primary), #818cf8);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  
-  .hero p {
-    font-size: clamp(1rem, 1vw + 0.8rem, 1.25rem);
-    color: var(--text-muted);
-    max-width: 65ch;
-  }
-  
-  .cta-btn {
-    display: inline-block;
-    text-decoration: none;
-    background-color: var(--primary);
-    color: var(--bg-dark);
-    padding: 16px 32px;
-    border-radius: 8px;
-    font-weight: bold;
-    margin-top: 2.5rem;
-    transition: transform 0.2s ease, background 0.2s ease;
-  }
-  
-  .cta-btn:hover {
-    transform: scale(1.05);
-    background-color: #7dd3fc;
-  }
-  
-  /* ==========================================
-     4. PROBLEM SECTION & GRID
-     ========================================== */
-  .problems {
-    padding: 100px 0;
-    text-align: center;
-  }
-  
-  .section-header h2 {
-    font-size: 2rem;
-    margin-bottom: 50px;
-  }
-  
-  .problem-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-  }
-  
-  .card {
-    background: var(--glass);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 40px 30px;
-    border-radius: 16px;
-    text-align: left;
-    transition: all 0.3s ease;
-  }
-  
-  .card:hover {
-    border-color: var(--primary);
-    transform: translateY(-10px);
-    background: rgba(255, 255, 255, 0.05);
-  }
-  
-  .card h3 {
-    color: var(--primary);
-    margin-bottom: 15px;
-  }
-  
-  /* ==========================================
-     5. FEEDBACK SYSTEM (Floating above Footer)
-     ========================================== */
-  #feedback-teaser, #widget-content {
-    position: fixed;
-    bottom: 120px; /* Aligned to sit above footer links */
-    right: 30px;
-    z-index: 2000;
-  }
-  
-  /* TEASER SLIDE LOGIC */
-  #feedback-teaser {
-    right: -450px; /* Initially off-screen */
-    display: flex;
-    align-items: center;
-    transition: right 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
-  
-  #feedback-teaser.active {
-    right: 30px;
-  }
-  
-  .teaser-bubble {
-    background: var(--primary);
-    color: var(--bg-dark);
-    padding: 15px 20px;
-    border-radius: 20px 20px 0 20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-  }
-  
-  #open-widget-btn {
-    background: var(--bg-dark);
-    color: white;
-    border: none;
-    padding: 6px 15px;
-    border-radius: 8px;
-    margin-top: 10px;
-    cursor: pointer;
-    font-size: 0.85rem;
-  }
-  
-  /* MAIN WIDGET BOX */
-  #widget-content {
-    background: #1e293b;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 25px;
-    border-radius: 16px;
-    width: 300px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(10px);
-  }
-  
-  .emoji-row {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
-  }
-  
-  .emoji-btn {
-    background: none;
-    border: none;
-    font-size: 2rem;
-    cursor: pointer;
-    transition: transform 0.2s;
-  }
-  
-  .emoji-btn:hover {
-    transform: scale(1.3);
-  }
-  
-  /* ==========================================
-     6. FOOTER SECTION
-     ========================================== */
-  .footer {
-    padding: 60px 0 40px 0;
-    margin-top: 100px;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    background: rgba(15, 23, 42, 0.8);
-    position: relative;
-  }
-  
-  .footer-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    font-size: 0.9rem;
-    color: var(--text-muted);
-  }
-  
-  .footer-links {
-    display: flex;
-    gap: 20px;
-  }
-  
-  /* VISIBILITY UTILITIES */
-  .content-hidden, .hidden {
-    display: none;
-  }
-  /* ==========================================
-   7. MOBILE RESPONSIVENESS
-   Adjusts layout for screens smaller than 768px
-   ========================================== */
+:root {
+  --primary: #38bdf8;
+  --bg-dark: #0f172a;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --glass: rgba(255, 255, 255, 0.03);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+.container { width: 90%; max-width: 1100px; margin: 0 auto; }
+.grid { display: grid; gap: 30px; }
+
+/* NAVIGATION */
+.navbar {
+  position: fixed;
+  top: 0; width: 100%; z-index: 1000;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.logo { font-size: 1.5rem; font-weight: 800; padding: 1rem 0; display: flex; align-items: center; gap: 8px; }
+.logo-icon { background: linear-gradient(135deg, var(--primary), #818cf8); padding: 4px; border-radius: 6px; }
+
+/* HERO */
+.hero { min-height: 85vh; display: flex; align-items: center; text-align: center; padding-top: 80px; }
+.hero-inner { display: flex; flex-direction: column; align-items: center; width: 100%; }
+h1 {
+  font-size: clamp(2.2rem, 5vw + 1rem, 3.5rem);
+  margin-bottom: 1.5rem;
+  background: linear-gradient(90deg, var(--primary), #818cf8);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.hero p { font-size: clamp(1.1rem, 1vw + 0.8rem, 1.25rem); color: var(--text-muted); max-width: 65ch; margin-bottom: 2rem; }
+
+/* HERO FORM */
+.hero-form {
+  display: flex; background: rgba(255, 255, 255, 0.05);
+  padding: 8px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1);
+  max-width: 500px; width: 100%; margin-bottom: 20px;
+}
+.hero-form input { flex: 1; background: transparent; border: none; padding: 12px; color: white; outline: none; }
+.hero-badges { display: flex; gap: 30px; color: var(--text-muted); font-size: 0.9rem; }
+
+.cta-btn {
+  background-color: var(--primary); color: var(--bg-dark);
+  padding: 16px 32px; border-radius: 8px; font-weight: bold;
+  border: none; cursor: pointer; transition: transform 0.2s;
+}
+.cta-btn:hover { transform: scale(1.05); background-color: #7dd3fc; }
+
+/* SECTIONS */
+.problems, .how-it-works, .pricing { padding: 100px 0; text-align: center; }
+.section-title { font-size: 2rem; margin-bottom: 50px; }
+.card {
+  background: var(--glass); border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 40px 30px; border-radius: 16px; text-align: left; transition: 0.3s;
+}
+.card:hover { border-color: var(--primary); transform: translateY(-10px); }
+.card h3 { color: var(--primary); margin-bottom: 15px; }
+
+/* STEPS */
+.how-it-works { background: rgba(255, 255, 255, 0.02); }
+.step-num {
+  width: 50px; height: 50px; background: var(--primary); color: var(--bg-dark);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-weight: 800; margin: 0 auto 20px;
+}
+
+/* PRICING */
+.pricing-card {
+  background: linear-gradient(145deg, #1e293b, #0f2342);
+  border: 2px solid var(--primary); padding: 60px 40px; border-radius: 24px;
+  max-width: 500px; margin: 0 auto; position: relative;
+}
+.badge { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--primary); color: var(--bg-dark); padding: 5px 15px; border-radius: 20px; font-weight: bold; }
+.price { font-size: 4rem; font-weight: 800; margin: 20px 0; }
+.price-features { list-style: none; text-align: left; max-width: 250px; margin: 0 auto 30px; color: var(--text-muted); }
+
+/* FEEDBACK WIDGET */
+#feedback-teaser, #widget-content { position: fixed; bottom: 120px; right: 30px; z-index: 2000; }
+#feedback-teaser { right: -450px; transition: right 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+#feedback-teaser.active { right: 30px; }
+.teaser-bubble { background: var(--primary); color: var(--bg-dark); padding: 15px 20px; border-radius: 20px 20px 0 20px; }
+#widget-content { background: #1e293b; padding: 25px; border-radius: 16px; width: 300px; border: 1px solid rgba(255,255,255,0.1); }
+.emoji-btn { background: none; border: none; font-size: 2rem; cursor: pointer; transition: 0.2s; }
+.emoji-btn:hover { transform: scale(1.3); }
+
+/* SETUP PAGE SPECIFIC */
+.setup-page { background: #020617; padding-top: 140px; }
+.setup-card { background: #1e293b; border-radius: 20px; padding: 40px; max-width: 600px; margin: 0 auto; text-align: center; border: 1px solid rgba(255,255,255,0.1); }
+.icon-circle { width: 80px; height: 80px; background: rgba(56,189,248,0.1); color: var(--primary); font-size: 2.5rem; display: flex; align-items: center; justify-content: center; border-radius: 50%; margin: 0 auto 20px; }
+.next-steps { background: rgba(255,255,255,0.03); padding: 25px; border-radius: 12px; margin: 30px 0; text-align: left; }
+.next-steps ul { list-style: none; }
+.next-steps li { margin-bottom: 10px; color: var(--text-muted); }
+.next-steps li::before { content: '→ '; color: var(--primary); }
+.setup-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 30px; }
+
+/* UTILS & RESPONSIVE */
+.content-hidden, .hidden { display: none; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.email-success { animation: fadeIn 0.6s ease-out; }
+
 @media (max-width: 768px) {
-  /* HERO: Reduce font sizes so they don't wrap awkwardly */
-  h1 {
-    font-size: 2rem;
-  }
-
-  .hero p {
-    font-size: 1rem;
-  }
-
-  /* GRID: Force cards to stack in a single column */
-  .problem-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
-  /* WIDGET: Center the popup and make it slightly smaller */
-  #feedback-teaser, #widget-content {
-    right: 5%;
-    left: 5%; /* Centers it on mobile */
-    width: 90%;
-    bottom: 80px; /* Moves it closer to the bottom on small screens */
-  }
-
-  #feedback-teaser.active {
-    right: 5%;
-  }
-
-  /* FOOTER: Stack links vertically for easier tapping */
-  .footer-content {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .footer-links {
-    justify-content: center;
-  }
+  .hero-form, .hero-badges { flex-direction: column; }
+  .grid { grid-template-columns: 1fr; }
+  #feedback-teaser, #widget-content { right: 5%; left: 5%; width: 90%; }
 }
